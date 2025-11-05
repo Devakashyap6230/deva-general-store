@@ -1,4 +1,516 @@
 <!doctype html>
 <html lang="hi">
-<!-- The full HTML content provided by the user -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deva General Store — Deva General Store</title>
+  <meta name="description" content="Deva General Store - Everything you need, every day — DEVA General Store. Mobile friendly."/>
+  <style>
+    /* LIGHT, FAST, MOBILE-FIRST STYLES - Premium look but lightweight */
+    :root{
+      --bg:#f6f8fb; --card:#ffffff; --accent:#0b5cff; --accent-2:#ff8a00; --muted:#6b7280;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:#0b1220;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:980px;margin:0 auto;padding:14px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    h1{margin:0;font-size:18px}
+    .sub{font-size:13px;color:var(--muted)}
+    .card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(11,17,34,0.04);border:1px solid rgba(11,17,34,0.03)}
+    .grid{display:grid;grid-template-columns:1fr 340px;gap:12px;margin-top:12px}
+    @media(max-width:880px){ .grid{grid-template-columns:1fr} .aside{order:2} .main{order:1} .logo{width:48px;height:48px} }
+    .search{width:100%;padding:10px;border-radius:10px;border:1px solid #e6eef6;background:#fbfdff}
+    .products{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+    @media(max-width:560px){ .products{grid-template-columns:1fr} }
+    .prod{display:flex;gap:8px;align-items:center;padding:8px;border-radius:10px;background:#fbfdff;border:1px solid #eef4ff}
+    .pimg{width:56px;height:56px;border-radius:8px;background:linear-gradient(180deg,#eef7ff,#f8fbff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)}
+    .pname{font-weight:600}
+    .muted{color:var(--muted);font-size:13px}
+    .price{font-weight:800;color:#0b1220}
+    .btn{padding:8px 10px;border-radius:8px;border:0;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:700}
+    .btn-ghost{background:transparent;border:1px solid rgba(11,17,34,0.06);color:var(--muted)}
+    .cartaside{position:sticky;top:14px}
+    .cart-item{display:flex;justify-content:space-between;gap:8px;padding:8px;border-radius:8px;background:#fff;border:1px solid #eef4ff;margin-bottom:8px}
+    .small{font-size:13px;color:var(--muted)}
+    footer{text-align:center;margin-top:14px;color:var(--muted);font-size:13px}
+    .lang-switch{display:flex;gap:8px;align-items:center}
+    .sharebtn{background:#25D366;color:#fff;padding:8px;border-radius:8px;border:0}
+    /* simple badge */
+    .badge{display:inline-block;padding:6px 8px;border-radius:8px;background:linear-gradient(90deg,var(--accent-2),#ffd0a3);color:#081127;font-weight:700;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">DG</div>
+        <div>
+          <h1 id="siteName">Deva General Store</h1>
+          <div class="sub" id="siteAddr">Lalli ka dera kurara hamirpur uttar pradesh</div>
+          <div class="sub" id="siteContact">WhatsApp: +91 62301 41460 · Email: dl1352770@gmail.com</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="lang-switch">
+          <select id="langSelect" class="search" style="width:140px;padding:8px">
+            <option value="auto">भाषा चुनें / Choose</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+        <button id="adminBtn" class="btn btn-ghost">Admin</button>
+      </div>
+    </header>
+
+    <!-- Welcome / Banner -->
+    <div style="margin-top:12px" class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <div id="welcomeTitle" style="font-size:18px;font-weight:800">✨ Welcome to Deva General Store!</div>
+          <div id="welcomeTag" class="muted" style="margin-top:6px">🛒 Everything you need, every day – all in one place — DEVA General Store.</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button id="shareBtn" class="sharebtn">🔗 शेयर करें / Share</button>
+          <a id="waOrderQuick" class="btn btn-primary" href="#" target="_blank">WhatsApp से Order</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Main -->
+      <main class="main">
+        <div style="margin-top:12px" class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div>
+              <strong id="productsTitle">Products (General Store)</strong>
+              <div class="small">Search & Add to cart — prices editable in Admin</div>
+            </div>
+            <div style="width:220px">
+              <input id="search" class="search" placeholder="सामान ढूँढें / Search item" />
+            </div>
+          </div>
+
+          <div class="products" id="products"></div>
+        </div>
+
+        <!-- Booking Card -->
+        <div style="margin-top:12px" class="card">
+          <h3 id="bookingTitle">गाड़ी बुकिंग — Eco 5★ AC CNG</h3>
+          <div class="small" style="margin-top:6px">स्कूल/भाडा/आउटस्टेशन के लिए भरें और WhatsApp से भेजें</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+            <input id="bk_name" placeholder="नाम / Name" />
+            <input id="bk_phone" placeholder="फ़ोन / Phone" />
+            <input id="bk_date" type="date" />
+            <input id="bk_time" type="time" />
+            <select id="bk_purpose"><option>School</option><option>Local Bhada / Hire</option><option>Outstation</option><option>Other</option></select>
+            <input id="bk_from" placeholder="Pickup (From)" />
+            <input id="bk_to" placeholder="Drop (To)" />
+            <input id="bk_km" type="number" placeholder="Approx Km" value="10" />
+            <input id="bk_rate" type="number" placeholder="Rate per Km (₹)" value="12" />
+            <textarea id="bk_remarks" placeholder="Remarks" style="grid-column:1/3"></textarea>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+            <div>
+              <div class="small">Estimated Fare</div>
+              <div id="fare" style="font-weight:800">₹120</div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button id="copyBooking" class="btn btn-ghost">Copy Booking</button>
+              <a id="sendBooking" class="btn btn-primary" href="#" target="_blank">WhatsApp पर भेजें</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:10px"></div>
+      </main>
+
+      <!-- Aside / Cart -->
+      <aside class="aside cartaside">
+        <div class="card">
+          <h3 id="cartTitle">Cart</h3>
+          <div id="cartList" style="margin-top:8px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+            <div class="small">Total</div>
+            <div id="cartTotal" style="font-weight:800">₹0</div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button id="clearCart" class="btn btn-ghost">Clear</button>
+            <a id="sendOrder" class="btn btn-primary" href="#" target="_blank">Order भेजें (WhatsApp)</a>
+          </div>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div class="card" style="margin-top:10px">
+          <h4 id="contactTitle">संपर्क करें / Contact</h4>
+          <div class="small" style="margin-top:8px">
+            WhatsApp: <strong>+91 62301 41460</strong><br/>
+            Email: <strong>dl1352770@gmail.com</strong><br/>
+            Address: <strong>Lalli ka dera kurara hamirpur uttar pradesh</strong>
+          </div>
+          <div style="height:8px"></div>
+          <div class="badge">Open: 7:00 - 23:00 · Night vehicle available</div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="small">© <span id="footerName">Deva General Store</span> · Built for mobile · Admin: devaadmin2025</div>
+    </footer>
+  </div>
+
+<script>
+/* ============================
+   Single-file light website JS
+   - Products generated programmatically (~100)
+   - Prices editable by Admin (localStorage)
+   - Language switch: auto + per-user choice (localStorage)
+   - WhatsApp order & booking builder
+   - Share button uses Web Share API or fallback copy
+   ============================ */
+
+const WHATSAPP_NUM = '+916230141460';
+const ADMIN_PW = 'devaadmin2025';
+const DEFAULT_LANG = 'hi'; // admin default language (can be changed in Admin)
+const SITE_NAME = 'Deva General Store';
+
+// Utility localStorage keys
+const SKEY = (k) => 'dg_' + k;
+
+// ------------- Products data (generate ~100 items across categories) -------------
+function generateProducts(){
+  const items = [];
+  const categories = [
+    {cat:'Anaaj / Atta & Chawal', base:['Aashirvaad Atta 5kg','Aashirvaad Atta 1kg','Sona Masoori Rice 5kg','Basmati Rice 1kg']},
+    {cat:'Tel / Cooking Oil & Masale', base:['Fortune Oil 1L','Saffola Gold 1L','Mustard Oil 1L','Turmeric Powder 100g']},
+    {cat:'Dal / Pulses', base:['Toor Dal 1kg','Moong Dal 1kg','Masoor Dal 1kg','Chana Dal 1kg']},
+    {cat:'Namak / Cheeni / Chai', base:['Tata Salt 1kg','Madhur Sugar 1kg','Tata Tea 250g','Red Label 250g']},
+    {cat:'Biscuit / Snacks', base:['Parle-G 250g','Britannia Good Day 75g','Haldiram Namkeen 200g','Kurkure 70g']},
+    {cat:'Noodles / RTE', base:['Maggi 70g','Knorr Soup','MTR Rajma Masala','Ready Roti Pack']},
+    {cat:'Dairy / Cold Drinks / Water', base:['Bisleri 1L','Amul Milk 1L','Coca-Cola 1.25L','Mountain Dew 1.25L']},
+    {cat:'Personal Care', base:['Clinic Plus Sachet','Colgate Toothpaste 100g','Lifebuoy Soap 100g','Dove Shampoo 180ml']},
+    {cat:'Home Care', base:['Surf Excel 1kg','Wheel 1kg','Vim Bar','Harpic Toilet Cleaner']},
+    {cat:'Stationery', base:['Notebook A-4','Ball Pen','Pencil','Eraser']},
+    {cat:'Hardware / Household', base:['Torch (small)','Batteries AA pack','Tape Roll','Nail Pack']},
+    {cat:'Services', base:['Mobile Recharge','Bill Payment','Vehicle Booking','SIM Topup']}
+  ];
+  let id=1;
+  categories.forEach(c=>{
+    c.base.forEach((name,idx)=>{
+      // create multiple pack sizes and variants to reach ~100 items
+      const variants = [name, name + ' (500g)', name + ' (1kg)', name + ' (2kg)'];
+      variants.forEach(v=>{
+        const price = Math.max(5, Math.round((10 + Math.random()*400) / 5) * 5); // round to 5 rupees
+        items.push({id:id++, name:v, price: price, sku: 'SKU'+id, category: c.cat});
+      });
+    });
+  });
+  // ensure at least ~100 items (if less, clone with small variations)
+  while(items.length < 100){
+    const idx = Math.floor(Math.random()*items.length);
+    const clone = Object.assign({}, items[idx]);
+    clone.id = items.length + 1;
+    clone.sku = 'SKU' + clone.id;
+    clone.name = clone.name + ' X';
+    items.push(clone);
+  }
+  return items;
+}
+
+// Load/save products from localStorage
+let products = (function(){
+  try{
+    const raw = localStorage.getItem(SKEY('products_v2'));
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  const generated = generateProducts();
+  localStorage.setItem(SKEY('products_v2'), JSON.stringify(generated));
+  return generated;
+})();
+
+// Render products (searchable)
+const productsEl = document.getElementById('products');
+const searchEl = document.getElementById('search');
+
+function renderProducts(filter=''){
+  productsEl.innerHTML = '';
+  const q = (filter||'').trim().toLowerCase();
+  products.filter(p=>p.name.toLowerCase().includes(q)).forEach(p=>{
+    const div = document.createElement('div'); div.className = 'prod';
+    div.innerHTML = `
+      <div class="pimg">${p.name.split(' ')[0].slice(0,2).toUpperCase()}</div>
+      <div style="flex:1">
+        <div class="pname">${p.name}</div>
+        <div class="muted small">${p.category} · SKU: ${p.sku}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="price">₹${p.price}</div>
+        <div style="height:8px"></div>
+        <button class="btn btn-primary" data-id="${p.id}">Add</button>
+      </div>
+    `;
+    productsEl.appendChild(div);
+  });
+  attachAddButtons();
+}
+function attachAddButtons(){
+  document.querySelectorAll('[data-id]').forEach(btn=>{
+    btn.onclick = ()=> addToCart(Number(btn.getAttribute('data-id')));
+  });
+}
+searchEl.addEventListener('input', ()=> renderProducts(searchEl.value));
+renderProducts();
+
+// ---------------- Cart ----------------
+let cart = JSON.parse(localStorage.getItem(SKEY('cart')) || '[]');
+const cartListEl = document.getElementById('cartList');
+const cartTotalEl = document.getElementById('cartTotal');
+const sendOrderBtn = document.getElementById('sendOrder');
+const waOrderQuick = document.getElementById('waOrderQuick');
+
+function saveCart(){ localStorage.setItem(SKEY('cart'), JSON.stringify(cart)); renderCart(); }
+function addToCart(id){
+  const p = products.find(x=>x.id===id);
+  if(!p) return;
+  const found = cart.find(x=>x.id===id);
+  if(found) found.qty++;
+  else cart.push({id:p.id,name:p.name,price:p.price,qty:1});
+  saveCart();
+}
+function renderCart(){
+  cartListEl.innerHTML = '';
+  if(cart.length===0){ cartListEl.innerHTML = '<div class="small">Cart खाली है / Cart is empty</div>'; cartTotalEl.textContent='₹0'; sendOrderBtn.href='#'; waOrderQuick.href='#'; return; }
+  cart.forEach(item=>{
+    const div = document.createElement('div'); div.className='cart-item';
+    div.innerHTML = `<div style="flex:1"><div style="font-weight:700">${item.name}</div><div class="small">₹${item.price} each</div></div>
+      <div style="text-align:right"><div style="font-weight:700">₹${item.price*item.qty}</div>
+      <div style="margin-top:6px"><button class="btn btn-ghost" data-op="dec" data-id="${item.id}">-</button>
+      <button class="btn btn-ghost" data-op="inc" data-id="${item.id}">+</button></div></div>`;
+    cartListEl.appendChild(div);
+  });
+  attachCartButtons();
+  const total = cart.reduce((s,it)=>s+it.price*it.qty,0);
+  cartTotalEl.textContent = '₹'+total;
+  const wa = buildOrderWhatsAppMessage();
+  sendOrderBtn.href = `https://wa.me/${WHATSAPP_NUM.replace(/\D/g,'')}?text=${encodeURIComponent(wa)}`;
+  waOrderQuick.href = sendOrderBtn.href;
+}
+function attachCartButtons(){
+  document.querySelectorAll('[data-op]').forEach(b=>{
+    b.onclick=()=>{
+      const id = Number(b.getAttribute('data-id')); const op = b.getAttribute('data-op');
+      const it = cart.find(x=>x.id===id);
+      if(!it) return;
+      if(op==='inc') it.qty++; else it.qty = Math.max(0,it.qty-1);
+      cart = cart.filter(x=>x.qty>0);
+      saveCart();
+    }
+  });
+}
+document.getElementById('clearCart').onclick = ()=>{ cart=[]; saveCart(); };
+renderCart();
+
+function buildOrderWhatsAppMessage(){
+  let msg = `${SITE_NAME} से Order / Order from ${SITE_NAME}%0A`;
+  cart.forEach(it=> msg += `${it.name} x ${it.qty} = ₹${it.price*it.qty}%0A`);
+  msg += `Total: ₹${cart.reduce((s,it)=>s+it.price*it.qty,0)}%0A`;
+  msg += `Pickup/Delivery details: `;
+  return msg;
+}
+
+// ---------------- Booking ----------------
+const bkName = document.getElementById('bk_name'),
+      bkPhone = document.getElementById('bk_phone'),
+      bkDate = document.getElementById('bk_date'),
+      bkTime = document.getElementById('bk_time'),
+      bkPurpose = document.getElementById('bk_purpose'),
+      bkFrom = document.getElementById('bk_from'),
+      bkTo = document.getElementById('bk_to'),
+      bkKm = document.getElementById('bk_km'),
+      bkRate = document.getElementById('bk_rate'),
+      bkRemarks = document.getElementById('bk_remarks'),
+      fareEl = document.getElementById('fare'),
+      sendBooking = document.getElementById('sendBooking'),
+      copyBooking = document.getElementById('copyBooking');
+
+function updateFare(){ const km = Number(bkKm.value||0); const r = Number(bkRate.value||0); fareEl.textContent = '₹'+(km*r); }
+[bkKm,bkRate].forEach(e=>e.addEventListener('input', updateFare)); updateFare();
+
+function buildBookingMsg(){
+  const km = Number(bkKm.value||0); const r = Number(bkRate.value||0);
+  let msg = `Vehicle Booking - Eco 5★ AC CNG%0AName: ${bkName.value}%0APhone: ${bkPhone.value}%0ADate: ${bkDate.value}%0ATime: ${bkTime.value}%0APurpose: ${bkPurpose.value}%0AFrom: ${bkFrom.value}%0ATo: ${bkTo.value}%0AEst Km: ${km}%0ARate/km: ₹${r}%0AEst Fare: ₹${km*r}%0ARemarks: ${bkRemarks.value}`;
+  return msg;
+}
+sendBooking.onclick = function(){
+  const msg = buildBookingMsg();
+  sendBooking.href = `https://wa.me/${WHATSAPP_NUM.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`;
+}
+copyBooking.onclick = function(){ const txt = decodeURIComponent(buildBookingMsg().replace(/%0A/g,'\n')); navigator.clipboard.writeText(txt).then(()=> alert('Booking copied')); }
+
+// ---------------- Share button (auto message) ----------------
+document.getElementById('shareBtn').onclick = async function(){
+  const link = location.href; // when hosted real domain will be used
+  const textHi = `🛍️ Deva General Store – हर रोज़ की ज़रूरत, एक ही जगह!\nदेखिए हमारे प्रोडक्ट और गाड़ी बुकिंग की सुविधा.\n👉 ${link}`;
+  const textEn = `🛍️ Deva General Store – Everything you need, every day!\nCheck our products & vehicle booking.\n👉 ${link}`;
+  const lang = getLang();
+  const payload = (lang==='en')? textEn : textHi;
+  if(navigator.share){
+    try{ await navigator.share({title: SITE_NAME, text: payload, url: link}); }catch(e){}
+  } else {
+    // fallback: copy to clipboard
+    navigator.clipboard.writeText(payload).then(()=> alert('Share message copied. Paste where you want to share.'));
+  }
+};
+
+// ---------------- Language system ----------------
+const langSelect = document.getElementById('langSelect');
+function getLang(){
+  const stored = localStorage.getItem(SKEY('lang'));
+  if(stored && stored!=='auto') return stored;
+  // auto-detect from browser
+  const nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'hi';
+  if(nav.startsWith('en')) return 'en';
+  return 'hi';
+}
+function applyLang(l){
+  // Default texts; bilingual support
+  const texts = {
+    en: {
+      welcomeTitle: '✨ Welcome to Deva General Store!',
+      welcomeTag: '🛒 Everything you need, every day – all in one place — DEVA General Store.',
+      productsTitle: 'Products (General Store)',
+      bookingTitle: 'Vehicle Booking — Eco 5★ AC CNG',
+      cartTitle: 'Cart',
+      contactTitle: 'Contact',
+      btnOrder: 'Order via WhatsApp',
+      sendBooking: 'Send Booking on WhatsApp'
+    },
+    hi: {
+      welcomeTitle: '✨ देवा जनरल स्टोर में आपका स्वागत है!',
+      welcomeTag: '🛒 हर रोज़ की ज़रूरत, सब कुछ — एक ही जगह — देवा जनरल स्टोर।',
+      productsTitle: 'सामान सूची (General Store)',
+      bookingTitle: 'गाड़ी बुकिंग — Eco 5★ AC CNG',
+      cartTitle: 'कार्ट',
+      contactTitle: 'संपर्क करें',
+      btnOrder: 'WhatsApp से Order',
+      sendBooking: 'WhatsApp पर भेजें'
+    }
+  };
+  const t = texts[l] || texts.hi;
+  document.getElementById('welcomeTitle').textContent = t.welcomeTitle;
+  document.getElementById('welcomeTag').textContent = t.welcomeTag;
+  document.getElementById('productsTitle').textContent = t.productsTitle;
+  document.getElementById('bookingTitle').textContent = t.bookingTitle;
+  document.getElementById('cartTitle').textContent = t.cartTitle;
+  document.getElementById('contactTitle').textContent = t.contactTitle;
+  document.getElementById('waOrderQuick').textContent = t.btnOrder;
+  document.getElementById('sendBooking').textContent = t.sendBooking;
+}
+function initLang(){
+  const choice = localStorage.getItem(SKEY('lang')) || 'auto';
+  langSelect.value = choice;
+  const lang = (choice==='auto')? getLang() : choice;
+  applyLang(lang);
+}
+langSelect.addEventListener('change', ()=>{
+  localStorage.setItem(SKEY('lang'), langSelect.value);
+  const lang = (langSelect.value==='auto')? getLang() : langSelect.value;
+  applyLang(lang);
+});
+initLang();
+
+// ---------------- Admin (simple) ----------------
+document.getElementById('adminBtn').onclick = ()=> {
+  const pw = prompt('Enter admin password:');
+  if(!pw) return;
+  if(pw !== ADMIN_PW){ alert('Wrong password'); return; }
+  openAdminPanel();
+};
+
+function openAdminPanel(){
+  const overlay = document.createElement('div');
+  overlay.style.position='fixed';overlay.style.inset=0;overlay.style.background='rgba(2,6,23,0.6)';overlay.style.zIndex=9999;
+  overlay.style.display='flex';overlay.style.alignItems='center';overlay.style.justifyContent='center';
+  const panel = document.createElement('div'); panel.className='card';
+  panel.style.width='92%'; panel.style.maxWidth='880px'; panel.style.maxHeight='82vh'; panel.style.overflow='auto';
+  let html = `<h3>Admin — Edit Prices & Settings</h3><div class="small">Change listing prices. Changes saved locally on this device.</div><div style="height:8px"></div>`;
+  html += `<div style="display:grid;grid-template-columns:1fr 120px 120px;gap:8px">`;
+  products.forEach(p=>{
+    html += `<div style="padding:8px;border-radius:8px;background:#fbfdff">${p.name}</div>`;
+    html += `<div><input data-id="${p.id}" class="priceInput" value="${p.price}" /></div>`;
+    html += `<div><button class="saveBtn btn btn-primary" data-id="${p.id}">Save</button></div>`;
+  });
+  html += `</div><div style="height:12px"></div>`;
+  html += `<div style="display:flex;gap:8px"><button id="exportBtn" class="btn btn-ghost">Export JSON</button><button id="importBtn" class="btn btn-ghost">Import JSON</button><button id="setDefaultLang" class="btn btn-ghost">Set Default Lang</button><button id="closeAdmin" class="btn btn-ghost">Close</button></div>`;
+  panel.innerHTML = html;
+  overlay.appendChild(panel); document.body.appendChild(overlay);
+
+  panel.querySelectorAll('.saveBtn').forEach(b=>{
+    b.onclick = ()=>{
+      const id = Number(b.getAttribute('data-id'));
+      const inp = panel.querySelector(`input[data-id="${id}"]`);
+      const v = Number(inp.value || 0);
+      const idx = products.findIndex(x=>x.id===id);
+      if(idx>=0){ products[idx].price = v; localStorage.setItem(SKEY('products_v2'), JSON.stringify(products)); renderProducts(searchEl.value); renderCart(); alert('Updated'); }
+    }
+  });
+
+  document.getElementById('exportBtn').onclick = ()=>{
+    const data = JSON.stringify(products);
+    const blob = new Blob([data], {type:'application/json'}); const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'deva_products_prices.json'; a.click();
+  };
+  document.getElementById('importBtn').onclick = ()=>{
+    const inp = document.createElement('input'); inp.type='file'; inp.accept='.json';
+    inp.onchange = ()=> {
+      const file = inp.files[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ()=> {
+        try{
+          const parsed = JSON.parse(reader.result);
+          if(Array.isArray(parsed)){ products = parsed; localStorage.setItem(SKEY('products_v2'), JSON.stringify(products)); renderProducts(''); renderCart(); alert('Imported'); overlay.remove(); }
+          else alert('Invalid file');
+        }catch(e){ alert('Invalid JSON'); }
+      };
+      reader.readAsText(file);
+    };
+    inp.click();
+  };
+  document.getElementById('setDefaultLang').onclick = ()=>{
+    const newLang = prompt('Set default language for site (hi / en):', 'hi');
+    if(!newLang) return;
+    localStorage.setItem(SKEY('default_lang'), newLang);
+    alert('Default language saved locally on this device');
+  };
+  document.getElementById('closeAdmin').onclick = ()=> overlay.remove();
+}
+
+// ---------------- Helpers on load ----------------
+function renderCart(){ renderCart; } // placeholder
+function renderProductsOnReady(){ renderProducts(''); renderCart(); }
+renderProductsOnReady();
+
+// -------------- Language init (respect admin default if set) --------------
+(function(){
+  const savedDefault = localStorage.getItem(SKEY('default_lang'));
+  if(savedDefault) { localStorage.setItem(SKEY('lang'), savedDefault); initLang(); }
+})();
+
+// -------------- small safety: remove large debug ----------
+window.addEventListener('load', ()=> {
+  // set WA links initial
+  const waLink = `https://wa.me/${WHATSAPP_NUM.replace(/\D/g,'')}?text=${encodeURIComponent('Hello, I want to place an order from '+SITE_NAME)}`;
+  document.getElementById('waOrderQuick').href = waLink;
+});
+
+// -------------- render initial count --------------
+renderCart(); // ensure cart shown
+
+</script>
+</body>
 </html>
